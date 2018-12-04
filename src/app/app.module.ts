@@ -14,6 +14,8 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './content/login/login.component';
 import { CadastroComponent } from './content/cadastro/cadastro.component';
 import { AreaTrabalhoComponent } from './content/area-trabalho/area-trabalho.component';
+import { CriarSalaComponent } from './content/criar-sala/criar-sala.component';
+import { EntrarSalaComponent } from './content/entrar-sala/entrar-sala.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { AreaTrabalhoComponent } from './content/area-trabalho/area-trabalho.com
     FooterComponent,
     LoginComponent,
     CadastroComponent,
-    AreaTrabalhoComponent
+    AreaTrabalhoComponent,
+    CriarSalaComponent,
+    EntrarSalaComponent
   ],
   imports: [
     BrowserModule,
