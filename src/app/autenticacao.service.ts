@@ -58,7 +58,6 @@ export class Autenticacao{
     public sair(): void {
         firebase.auth().signOut()
             .then(() => {
-                alert('ok')
                 localStorage.removeItem('idToken')
                 this.token_id = undefined
                 this.router.navigate(['/login'])
