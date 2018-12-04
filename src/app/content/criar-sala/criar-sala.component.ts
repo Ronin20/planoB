@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-criar-sala',
@@ -6,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./criar-sala.component.css']
 })
 export class CriarSalaComponent implements OnInit {
+
+  public form_criar_sala: FormGroup = new FormGroup({
+    'tema': new FormControl(null),
+    'qtd_membros': new FormControl(null)
+  })
+
+
 
   constructor() { }
 
