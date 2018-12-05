@@ -1,3 +1,6 @@
+import { Bd } from './bd.service';
+import { EntrarSalaComponent } from './content/area-trabalho/entrar-sala/entrar-sala.component';
+import { CriarSalaComponent } from './content/area-trabalho/criar-sala/criar-sala.component';
 import { AutenticacaoGuard } from './autenticacao-guard.service';
 import { ROUTES } from './app.routes';
 import { Autenticacao } from './autenticacao.service';
@@ -6,7 +9,6 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
 
-
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { ContentComponent } from './content/content.component';
@@ -14,8 +16,7 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './content/login/login.component';
 import { CadastroComponent } from './content/cadastro/cadastro.component';
 import { AreaTrabalhoComponent } from './content/area-trabalho/area-trabalho.component';
-import { CriarSalaComponent } from './content/criar-sala/criar-sala.component';
-import { EntrarSalaComponent } from './content/entrar-sala/entrar-sala.component';
+import { EntrarRoomComponent } from './content/area-trabalho/entrar-room/entrar-room.component';
 
 @NgModule({
   declarations: [
@@ -26,15 +27,17 @@ import { EntrarSalaComponent } from './content/entrar-sala/entrar-sala.component
     LoginComponent,
     CadastroComponent,
     AreaTrabalhoComponent,
-    CriarSalaComponent,
-    EntrarSalaComponent
+    CriarSalaComponent, 
+    EntrarSalaComponent, 
+    EntrarRoomComponent
+  
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [Autenticacao, AutenticacaoGuard],
+  providers: [Autenticacao, AutenticacaoGuard, Bd],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
