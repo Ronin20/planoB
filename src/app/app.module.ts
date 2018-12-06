@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
+import { NaoautenticacaoGuard } from './nao-autenticado-guard.service';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -17,6 +18,7 @@ import { LoginComponent } from './content/login/login.component';
 import { CadastroComponent } from './content/cadastro/cadastro.component';
 import { AreaTrabalhoComponent } from './content/area-trabalho/area-trabalho.component';
 import { EntrarRoomComponent } from './content/area-trabalho/entrar-room/entrar-room.component';
+import { SalaComponent } from './sala/sala.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { EntrarRoomComponent } from './content/area-trabalho/entrar-room/entrar-
     AreaTrabalhoComponent,
     CriarSalaComponent, 
     EntrarSalaComponent, 
-    EntrarRoomComponent
+    EntrarRoomComponent, 
+    SalaComponent
   
   ],
   imports: [
