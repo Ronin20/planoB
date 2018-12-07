@@ -9,7 +9,7 @@ body {
     height: 100vh;
     display: grid;
     grid-template-rows: 40px 50px 1fr;
-    background-color: #3E4095;
+    background-color: #e2e4e6;
     color: #eee;
    
   }
@@ -19,13 +19,15 @@ body {
     align-items: center;
   }
   .navbar.app {
-    background-color: #0067a3;
+    background-color:  #e2e4e6;
     font-size: 1.5rem;
   }
   .navbar.board {
     font-size: 1.1rem;
   }
   .lists {
+    margin-top: 10px;
+    background-color: #e2e4e6;
     width: 100%;
     height: 500px;;
     display: flex;
@@ -46,7 +48,7 @@ body {
     height: calc(100% - 10px - 17px);
   }
   .list > * {
-    background-color: #e2e4e6;
+    background-color:#0067a3;
     color: #333;
     padding: 0 10px;
   }
@@ -71,13 +73,18 @@ body {
   }
   .list ul li {
     background-color: #fff;
+    margin: 5px;
     padding: 10px;
     border-radius: 3px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   }
+
+  
+
   .list ul li:not(:last-child) {
     margin-bottom: 10px;
   }
+
   .list ul li img {
     display: block;
     width: calc(100% + 2 * 10px);
