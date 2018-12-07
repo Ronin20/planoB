@@ -4,22 +4,22 @@
 			<header>{{s.titulo}}</header>
 			<ul *ngFor="let i of s.ideias">
 				<li>{{i.titulo}}</li>
-
+		
 			</ul>
 			<footer>
-				<form form [formGroup]="form_cadastro" (ngSubmit)="addIdeia">
+				----------------------------------------------
+				<form [formGroup]="form_add_ideia" (ngSubmit)="addIdeia()">
 					<div class="form-group">
 						<input 
-							type="email" 
-							class="form-control" 
-							placeholder="E-mail"
-							formControlName="email"
+							class="addidea"
+							type="text"
+							placeholder="add a idea"
+							formControlName="new_idea"
 						>
 					</div>
+					<button type="button" class="btn btn-success">Add</button>
 				</form>
 			</footer>
 		</div>
-
 	</div>
-	
 </div>

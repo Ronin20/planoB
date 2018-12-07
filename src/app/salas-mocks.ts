@@ -44,6 +44,24 @@ export const SALAS_E: Sala[]  = [
             {
                 titulo: 'ideia 4'
             }]
+        },
+        {
+            titulo: 'Categoria 6',
+            ideias: [{
+                titulo: 'ideia 7'
+            },
+            
+            {
+                titulo: 'ideia 8'
+            },
+            
+            {
+                titulo: 'ideia 9'
+            },
+            
+            {
+                titulo: 'ideia 10'
+            }]
         }]
     }
 
