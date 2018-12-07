@@ -1,18 +1,25 @@
 <div class="ui">
-	
-	
 	<div class="lists">
-		<div class="list">
-			<header>List header</header>
-			<ul>
-				<li>Lorem ipsum dolor sit amet</li>
-				<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
-				<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lobortis enim sit amet</li>
-				<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lobortis enim sit amet metus laoreet, ut condimentum</li>
+		<div class="list" *ngFor="let s of salas[2].categorias">
+			<header>{{s.titulo}}</header>
+			<ul *ngFor="let i of s.ideias">
+				<li>{{i.titulo}}</li>
+
 			</ul>
-			<footer>Add a card...</footer>
+			<footer>
+				<form form [formGroup]="form_cadastro" (ngSubmit)="addIdeia">
+					<div class="form-group">
+						<input 
+							type="email" 
+							class="form-control" 
+							placeholder="E-mail"
+							formControlName="email"
+						>
+					</div>
+				</form>
+			</footer>
 		</div>
-		
-		</div>
+
+	</div>
 	
 </div>
