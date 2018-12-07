@@ -8,7 +8,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
-import { NaoautenticacaoGuard } from './nao-autenticado-guard.service';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
