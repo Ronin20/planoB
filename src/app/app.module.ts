@@ -18,6 +18,7 @@ import { CadastroComponent } from './content/cadastro/cadastro.component';
 import { AreaTrabalhoComponent } from './content/area-trabalho/area-trabalho.component';
 import { EntrarRoomComponent } from './content/area-trabalho/entrar-room/entrar-room.component';
 import { SalaComponent } from './sala/sala.component';
+import { MenuSalaComponent } from './sala/menu-sala/menu-sala.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { SalaComponent } from './sala/sala.component';
     CriarSalaComponent, 
     EntrarSalaComponent, 
     EntrarRoomComponent, 
-    SalaComponent
+    SalaComponent, MenuSalaComponent
   
   ],
   imports: [

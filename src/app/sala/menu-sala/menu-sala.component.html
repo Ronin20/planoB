@@ -1,0 +1,24 @@
+
+
+<h4>Menu</h4>
+		<div class="menusala">
+			<h4>Categoria: </h4>
+			<form [formGroup]="form_add_ideia" (ngSubmit)="addIdeia()">
+				<select class="form-control form-control-lg" formControlName="categoria">
+					<option 
+						*ngFor="let s of salas[2].categorias"
+						value= "{{s.titulo}}"
+						>{{s.titulo}}
+					</option>
+				</select>
+
+				<input 
+					class="addidea"
+					type="text"
+					placeholder="add a idea"
+					formControlName="new_idea"
+				>
+
+				<button type="submit" class="btn btn-success" style="margin-top:10px;">Add</button>
+			</form>	
+		</div>

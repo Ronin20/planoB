@@ -1,32 +1,47 @@
-<div class="ui">
-	<div class="lists">
-		<div class="list" *ngFor="let s of salas[2].categorias">
-			<header>{{s.titulo}}</header>
-			<ul *ngFor="let i of s.ideias">
-				<li>{{i.titulo}}</li>
-		
-			</ul>
-			<footer>
-				----------------------------------------------
+<div class="row">
+	<div class="col-sm-9">
+		<div class="ui">
+			<div class="lists">
+				<div class="list" *ngFor="let s of salas[2].categorias">
+					<header>{{s.titulo}}</header>
+					<ul *ngFor="let i of s.ideias">
+						<li>{{i.titulo}}</li>
+				
+					</ul>
+					<footer>
+					</footer>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-3">
+		<h4>Menu</h4>
+		<div class="row">
+			<div>
+				<h4>Categoria: </h4>
 				<form [formGroup]="form_add_ideia" (ngSubmit)="addIdeia()">
-					<div class="form-group">
-						<input 
-							class="addidea"
-							type="text"
-							placeholder="add a idea"
-							formControlName="new_idea"
-						>
-						<input hidden
-							class="addidea"
-							type="text"
-							placeholder="add a idea"
-							value="a"
-							formControlName="categoria"
-						>
-					</div>
-					<button type="submit" class="btn btn-success">Add</button>
-				</form>
-			</footer>
+					<select class="form-control form-control-lg" formControlName="categoria">
+						<option 
+							*ngFor="let s of salas[2].categorias"
+							value= "{{s.titulo}}"
+							>{{s.titulo}}
+						</option>
+					</select>
+
+					<input 
+						class="addidea"
+						type="text"
+						placeholder="add a idea"
+						formControlName="new_idea"
+					>
+
+					<button type="submit" class="btn btn-success" style="margin-top:10px;">Add</button>
+				</form>	
+			</div>
+		</div>
+		<div class="row">
+			Aqui vao ser adicionadas as categorias
 		</div>
 	</div>
 </div>
