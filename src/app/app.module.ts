@@ -1,4 +1,5 @@
 import { Bd } from './bd.service';
+
 import { EntrarSalaComponent } from './content/area-trabalho/entrar-sala/entrar-sala.component';
 import { CriarSalaComponent } from './content/area-trabalho/criar-sala/criar-sala.component';
 import { AutenticacaoGuard } from './autenticacao-guard.service';
@@ -18,8 +19,12 @@ import { CadastroComponent } from './content/cadastro/cadastro.component';
 import { AreaTrabalhoComponent } from './content/area-trabalho/area-trabalho.component';
 import { EntrarRoomComponent } from './content/area-trabalho/entrar-room/entrar-room.component';
 import { SalaComponent } from './sala/sala.component';
-import { MenuSalaComponent } from './sala/menu-sala/menu-sala.component';
+import { MenuAddIdeaComponent } from './sala/menu-add-idea/menu-add-idea.component';
+import { MenuAddCategoyComponent } from './sala/menu-add-categoy/menu-add-categoy.component';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from './../environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,13 +37,16 @@ import { MenuSalaComponent } from './sala/menu-sala/menu-sala.component';
     CriarSalaComponent, 
     EntrarSalaComponent, 
     EntrarRoomComponent, 
-    SalaComponent, MenuSalaComponent
+    SalaComponent,
+    MenuAddIdeaComponent,
+    MenuAddCategoyComponent
   
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    AngularFirestoreModule
   ],
   providers: [Autenticacao, AutenticacaoGuard, Bd],
   bootstrap: [AppComponent]

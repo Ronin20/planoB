@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
       messagingSenderId: "307828593601"
     };
     firebase.initializeApp(config)
+ 
   }
   
   title = 'planoB';

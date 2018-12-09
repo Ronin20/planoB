@@ -1,9 +1,23 @@
+import { Sala } from './shared/sala.model';
+import { Categoria } from './shared/categoria.model';
 import { Ideia } from './shared/ideia.model';
 import * as firebase from 'firebase'
 
+import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+
 export class Bd{
 
-    public salas: any
+    constructor(){
+
+    }
+
+    public salas: any;
+    public salas_compartilhadas: Sala[]
+    public cat: Categoria[]
+    public idea: Ideia[]
+    
+    
 
     public criar_sala(sala: any): void {
         firebase.database().ref(`salas/${sala.id}`)
@@ -17,7 +31,7 @@ export class Bd{
     }
 
     public adicionar_ideia(ideia: any): void{
-        firebase.database().ref(`salas/${ideia.idSala}/${ideia.categoria}`)
+        firebase.database().ref().child(`salas/${ideia.idSala}/${ideia.categoria}`)
             .push({
                titulo: ideia.ideia
             })
@@ -25,12 +39,41 @@ export class Bd{
         console.log(ideia)
     }
 
+    public adicionar_categoria(categoria: any): void{
+        firebase.database().ref().child(`salas/${categoria.sala}/${categoria.nome}`)
+            .push()
+        console.log('Categoria adicionada')
+        
+    }
+
+    
+
+
     public atualiza_dados(sala: string): any{
+        console.log('Entramos aqui mlk')
         firebase.database().ref(`salas/${sala}`)
             .once('value')
             .then((snapshot) => {
-                this.salas = snapshot
+                console.log(snapshot.val())
+                snapshot.forEach((childSnapshot: any) => {
+                    console.log(childSnapshot.val())
+                    
+                })
+                
             })
-        
     }
+
+    public teste(): void {
+        console.log('FUNÇÃO TESTE')
+        var salas = firebase.database().ref('salas/' + '944');
+        salas.on('value', function(snapshot) {
+            console.log(snapshot.val())
+            //updateStarCount(postElement, snapshot.val());
+        });
+    }
+/*
+    public atualiza(sala:string): any{
+        return firebase.database().ref(``).once('value').then(function(snapshot) {
+        var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+    }*/
 }
