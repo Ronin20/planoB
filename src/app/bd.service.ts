@@ -1,24 +1,16 @@
-import { Sala } from './shared/sala.model';
-import { Categoria } from './shared/categoria.model';
-import { Ideia } from './shared/ideia.model';
 import * as firebase from 'firebase'
 
+import { AngularFireDatabase, snapshotChanges } from '@angular/fire/database';
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-
+import { map } from 'rxjs/operators';
+@Injectable({
+    providedIn: 'root'
+})
 export class Bd{
-
-    constructor(){
-
+    constructor(private db: AngularFireDatabase){
+       
     }
-
-    public salas: any;
-    public salas_compartilhadas: Sala[]
-    public cat: Categoria[]
-    public idea: Ideia[]
-    
-    
-
+    //---------------------------------------------------------------
     public criar_sala(sala: any): void {
         firebase.database().ref(`salas/${sala.id}`)
             .push({ id: sala.id,
@@ -36,8 +28,9 @@ export class Bd{
                titulo: ideia.ideia
             })
         console.log('Chegamos ate aqui')
-        console.log(ideia)
     }
+
+
 
     public adicionar_categoria(categoria: any): void{
         firebase.database().ref().child(`salas/${categoria.sala}/${categoria.nome}`)
@@ -46,34 +39,70 @@ export class Bd{
         
     }
 
-    
-
 
     public atualiza_dados(sala: string): any{
         console.log('Entramos aqui mlk')
         firebase.database().ref(`salas/${sala}`)
             .once('value')
             .then((snapshot) => {
-                console.log(snapshot.val())
+                
+                console.log('SNAPHOT COMPLETO: ', snapshot)
+                let snap = snapshot.val()
+                console.log('teste: ', snap.titulo)
                 snapshot.forEach((childSnapshot: any) => {
-                    console.log(childSnapshot.val())
+                    console.log(childSnapshot.val().key())
                     
                 })
                 
             })
     }
+    
+    public add_categoria(): void {
 
-    public teste(): void {
-        console.log('FUNÇÃO TESTE')
+    }
+
+    public teste(): any {
+        /*console.log('FUNÇÃO TESTE')
         var salas = firebase.database().ref('salas/' + '944');
         salas.on('value', function(snapshot) {
-            console.log(snapshot.val())
+            console.log(this.snapshotToArray(snapshot))
             //updateStarCount(postElement, snapshot.val());
-        });
+        });*/
     }
-/*
-    public atualiza(sala:string): any{
-        return firebase.database().ref(``).once('value').then(function(snapshot) {
-        var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+
+    /*getNumberChildrens(idSala: string) {
+        return ref.child("messages").on("value", function(snapshot) {
+            console.log("There are "+snapshot.numChildren()+" messages");
+          })
     }*/
+
+    getCategorias(idSala: string): any{
+        console.log('Entramos aqui mlk')
+        let cats: any[] = []
+        firebase.database().ref(`salas/${idSala}`)
+            .once('value')
+            .then((snapshot) => {
+                
+                console.log('SNAPHOT COMPLETO: ', snapshot)
+                //let snap = snapshot.val()
+                //console.log('teste: ', snap.titulo)
+                snapshot.forEach((childSnapshot: any) => {
+                    //console.log(childSnapshot.val())
+                    cats.push(childSnapshot.titulo)
+                })
+            })
+        return cats
+    }
+
+
+    getAll(idSala: string) {
+        return this.db.list(`salas/${idSala}`)
+          .snapshotChanges()
+          .pipe(
+            map(changes => {
+                return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+            })
+          );
+    }
+
 }

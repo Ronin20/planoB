@@ -23,8 +23,9 @@ import { MenuAddIdeaComponent } from './sala/menu-add-idea/menu-add-idea.compone
 import { MenuAddCategoyComponent } from './sala/menu-add-categoy/menu-add-categoy.component';
 
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { environment } from './../environments/environment';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +47,8 @@ import { environment } from './../environments/environment';
     BrowserModule,
     ReactiveFormsModule,
     RouterModule.forRoot(ROUTES),
-    AngularFirestoreModule
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule
   ],
   providers: [Autenticacao, AutenticacaoGuard, Bd],
   bootstrap: [AppComponent]
