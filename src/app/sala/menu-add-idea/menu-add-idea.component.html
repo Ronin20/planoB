@@ -4,9 +4,9 @@
 		<form [formGroup]="form_add_ideia" (ngSubmit)="addIdeia()">
 			  <select class="form-control form-control-lg" formControlName="categoria">
 					  <option 
-						    *ngFor="let s of salas[2].categorias"
-							  value= "{{s.titulo}}"
-							>{{s.titulo}}
+						    *ngFor="let categoria of categorias | async"
+							  value= "{{categoria.key}}"
+							>{{categoria.key}}
 						</option>
 				</select>
           

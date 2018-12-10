@@ -17,6 +17,10 @@ export class SalaComponent implements OnInit {
   categorias: Observable<any[]>
   cats: any[]
 
+
+  
+
+
   constructor(private banco: Bd) {}
 
   ngOnInit() {
@@ -25,7 +29,9 @@ export class SalaComponent implements OnInit {
   }
   exibir(): void {
     //console.log(this.cats)
-    console.log(this.cats[0].titulo)
+    //console.log(this.cats)
+    const mostra = item => this.banco.getAll(item))
+    this.categorias.forEach(mostra)
     //console.log(this.categorias)
   }
 
