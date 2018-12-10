@@ -1,12 +1,18 @@
-<!--<div class="row">
+<div class="row">
 	<div class="col-sm-10">
 		<div class="ui">
-			<div class="lists">
-				<div class="list" *ngFor="let s of salas[2].categorias">
-					<header>{{s.titulo}}</header>
-					<ul *ngFor="let i of s.ideias">
-						<li>{{i.titulo}}</li>
-					</ul>
+			<div class="lists" >
+				<div class="list" *ngFor="let categoria of categorias | async">
+					<header>{{categoria.key}}</header>
+					<div class="list" *ngFor="let c of cats">
+						
+							<ul>
+								<li>{{c.key}}</li>
+							</ul>
+						
+						
+					</div>
+					
 					<footer>
 					</footer>
 				</div>
@@ -28,8 +34,8 @@
 	</div>
 </div>
 
-<app-menu-add-idea></app-menu-add-idea>-->
-<p>COMPONENTE SALA</p>
+
+<!--<p>COMPONENTE SALA</p>
 <div class="card mt-2" *ngFor="let sala of salas | async">
 	<h5 class="card-title">{{(sala.key)}}</h5>
 	
@@ -37,5 +43,5 @@
 		<p>oi</p>
 		<p>{{s.titulo}}</p>
 	</div>
-</div>
+</div>-->
 <button type="button" class="btn btn-danger ml-2" (click)="exibir()">Exibir</button>

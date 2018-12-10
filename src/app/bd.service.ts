@@ -39,8 +39,6 @@ export class Bd{
         
     }
 
-    
-
 
     public atualiza_dados(sala: string): any{
         console.log('Entramos aqui mlk')
@@ -59,6 +57,10 @@ export class Bd{
             })
     }
     
+    public add_categoria(): void {
+
+    }
+
     public teste(): any {
         /*console.log('FUNÇÃO TESTE')
         var salas = firebase.database().ref('salas/' + '944');
@@ -73,6 +75,25 @@ export class Bd{
             console.log("There are "+snapshot.numChildren()+" messages");
           })
     }*/
+
+    getCategorias(idSala: string): any{
+        console.log('Entramos aqui mlk')
+        let cats: any[] = []
+        firebase.database().ref(`salas/${idSala}`)
+            .once('value')
+            .then((snapshot) => {
+                
+                //console.log('SNAPHOT COMPLETO: ', snapshot)
+                //let snap = snapshot.val()
+                //console.log('teste: ', snap.titulo)
+                snapshot.forEach((childSnapshot: any) => {
+                    //console.log(childSnapshot.val())
+                    cats.push(childSnapshot)
+                })
+            })
+        return cats
+    }
+
 
     getAll(idSala: string) {
         return this.db.list(`salas/${idSala}`)

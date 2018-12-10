@@ -13,17 +13,23 @@ import { Observable } from 'rxjs';
 export class SalaComponent implements OnInit {
   
   //public salas: Sala[] = SALAS_E
-  //public salas: any
-  salas: Observable<any>;
+  ideias: Observable<any>;
   categorias: Observable<any[]>
+  cats: any[]
+
   constructor(private banco: Bd) {}
 
   ngOnInit() {
-    this.salas = this.banco.getAll('944')
+    this.categorias = this.banco.getAll('944')
+    this.cats = this.banco.getCategorias('944')
   }
   exibir(): void {
-    console.log(this.salas.key)
+    console.log(this.cats)
+    //console.log(this.categorias)
   }
 
+  teste(): string{
+    return 'ola'
+  }
 
 }
