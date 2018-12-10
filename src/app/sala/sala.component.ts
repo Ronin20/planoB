@@ -24,7 +24,8 @@ export class SalaComponent implements OnInit {
     this.cats = this.banco.getCategorias('944')
   }
   exibir(): void {
-    console.log(this.cats)
+    //console.log(this.cats)
+    console.log(this.cats[0].titulo)
     //console.log(this.categorias)
   }
 

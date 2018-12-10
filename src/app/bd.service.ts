@@ -83,12 +83,12 @@ export class Bd{
             .once('value')
             .then((snapshot) => {
                 
-                //console.log('SNAPHOT COMPLETO: ', snapshot)
+                console.log('SNAPHOT COMPLETO: ', snapshot)
                 //let snap = snapshot.val()
                 //console.log('teste: ', snap.titulo)
                 snapshot.forEach((childSnapshot: any) => {
                     //console.log(childSnapshot.val())
-                    cats.push(childSnapshot)
+                    cats.push(childSnapshot.titulo)
                 })
             })
         return cats
