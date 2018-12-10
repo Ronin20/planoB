@@ -1,6 +1,9 @@
 import { Categoria } from './categoria.model';
 
 export class Sala {
-    //public id: string
-    public categorias: Categoria[]
+    constructor(
+        public id: string,
+        public categorias: Categoria[],
+        public admin: string
+    ){}
 }

@@ -1,4 +1,4 @@
-<div class="row">
+<!--<div class="row">
 	<div class="col-sm-10">
 		<div class="ui">
 			<div class="lists">
@@ -28,3 +28,14 @@
 	</div>
 </div>
 
+<app-menu-add-idea></app-menu-add-idea>-->
+<p>COMPONENTE SALA</p>
+<div class="card mt-2" *ngFor="let sala of salas | async">
+	<h5 class="card-title">{{(sala.key)}}</h5>
+	
+	<div class="div" *ngFor="let s of sala/sala.key | async">
+		<p>oi</p>
+		<p>{{s.titulo}}</p>
+	</div>
+</div>
+<button type="button" class="btn btn-danger ml-2" (click)="exibir()">Exibir</button>
