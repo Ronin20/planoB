@@ -76,28 +76,31 @@ export class Bd{
           })
     }*/
 
-    
+    getIdeas(idSala: string, cat: string): any {
+        let ideas: any[] = []
+        firebase.database().ref(`salas/${idSala}/${cat}`)
+            .once('value')
+            .then((snapshot) => {
+                snapshot.forEach((childSnapshot: any) => {
+                    ideas.push(childSnapshot.val())
+                })
+            })
+        return ideas
+    }
+
+
+
 
     getCategorias(idSala: string): any{
-        console.log('Entramos aqui mlk')
         let cats: any[] = []
-        let cats2: any[] = []
         
         firebase.database().ref(`salas/${idSala}`)
             .once('value')
             .then((snapshot) => {
-                
-                console.log('SNAPHOT COMPLETO: ', snapshot.val().keys)
-                //let snap = snapshot.val()
-                //console.log('teste: ', snap.titulo)
                 snapshot.forEach((childSnapshot: any) => {
-                    //console.log(childSnapshot.val())
-                    cats.push(childSnapshot.val())
+                    cats.push(childSnapshot.key)
                 })
             })
-        
-
-        console.log(cats)
         return cats
     }
 
