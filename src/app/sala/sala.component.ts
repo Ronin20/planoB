@@ -21,10 +21,10 @@ export class SalaComponent implements OnInit {
   constructor(private banco: Bd) {}
 
   ngOnInit() {
-    this.categorias = this.banco.getAll('944')
-    this.cats = this.banco.getCategorias('944')
+    this.categorias = this.banco.getAll(this.banco.idSala)
+    this.cats = this.banco.getCategorias(this.banco.idSala)
     //console.log('Estou no ng on init e a categoria passada é: ', this.cats[0])
-    this.ideias = this.banco.getIdeas('944', 'Categoria 4') // o problema esta aqui, cat[0] eh nulo neste momento
+    //this.ideias = this.banco.getIdeas('944', 'Categoria 4') // o problema esta aqui, cat[0] eh nulo neste momento
   }
   exibir(): void {
     //console.log(this.cats)

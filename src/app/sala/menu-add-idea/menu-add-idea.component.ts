@@ -33,11 +33,10 @@ export class MenuAddIdeaComponent implements OnInit {
 
   public addIdeia(): void {
     this.banco.adicionar_ideia({
-      idSala: '944',
       categoria: this.form_add_ideia.value.categoria,
       ideia: this.form_add_ideia.value.new_idea
     })
-    this.banco.atualiza_dados('944')
+    
   }
 
 }

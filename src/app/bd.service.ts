@@ -7,6 +7,9 @@ import { map } from 'rxjs/operators';
     providedIn: 'root'
 })
 export class Bd{
+
+    idSala: string
+
     constructor(private db: AngularFireDatabase){
        
     }
@@ -23,23 +26,32 @@ export class Bd{
     }
 
     public adicionar_ideia(ideia: any): void{
-        firebase.database().ref().child(`salas/${ideia.idSala}/${ideia.categoria}`)
+        firebase.database().ref().child(`salas/${this.idSala}/${ideia.categoria}`)
             .push({
                titulo: ideia.ideia
             })
-        console.log('Chegamos ate aqui')
     }
 
 
+    carregarSala(sala: string){
+        this.idSala = sala
+    }
+
+
+    delete(key: string) {
+        this.db.object(`salas/${key}`).remove();
+    }
 
     public adicionar_categoria(categoria: any): void{
-        firebase.database().ref().child(`salas/${categoria.sala}/${categoria.nome}`)
-            .push()
+        firebase.database().ref().child(`salas/${categoria.sala}}`)
+            .push({
+                nome: categoria.nome
+            })
         console.log('Categoria adicionada')
         
     }
 
-
+/*
     public atualiza_dados(sala: string): any{
         console.log('Entramos aqui mlk')
         firebase.database().ref(`salas/${sala}`)
@@ -60,7 +72,7 @@ export class Bd{
     public add_categoria(): void {
 
     }
-
+    */
     public teste(): any {
         /*console.log('FUNÇÃO TESTE')
         var salas = firebase.database().ref('salas/' + '944');

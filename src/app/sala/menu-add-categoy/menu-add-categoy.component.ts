@@ -23,13 +23,11 @@ export class MenuAddCategoyComponent implements OnInit {
 
 
   public addCategoria(): void {
-    /*this.bd.teste()
+    
     this.bd.adicionar_categoria({
       sala: '944',
       nome: this.form_add_categoria.value.new_categoria
     })
-    this.bd.atualiza_dados('944')
-  */
   }
 
 
