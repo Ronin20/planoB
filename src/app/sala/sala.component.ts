@@ -1,7 +1,7 @@
 import { Bd } from './../bd.service';
 import { Sala } from './../shared/sala.model';
 //import { SALAS_E } from './../salas-mocks';
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit, Injectable, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as firebase from 'firebase';
 @Component({
@@ -11,31 +11,36 @@ import * as firebase from 'firebase';
 })
 
 @Injectable()
-export class SalaComponent implements OnInit {
+export class SalaComponent implements OnInit, OnDestroy {
   
   //public salas: Sala[] = SALAS_E
   //ideias: Observable<any>;
-  categorias: Observable<any>= this.banco.categorias
+  categorias: Observable<any>
+  ideias2: Observable<any> = this.banco.ideias2
+  
   cats: any[] = this.banco.cats
-  ideias: any[] = this.banco.ideias
-  constructor(private banco: Bd) {}
+  ideias: any[] = this.banco.getIdeas('Categoria 5')
+
+  
+  constructor(private banco: Bd) {
+
+  }
 
   ngOnInit() {
-    //this.categorias = this.banco.getAll()
-    //this.cats = this.banco.getCategorias()
-    //console.log('Estou no ng on init e a categoria passada é: ', this.cats[0])
-    //this.ideias = this.banco.getIdeas('Categoria 3') // o problema esta aqui, cat[0] eh nulo neste momento
+    console.log('a sala eh: ', this.banco.idSala)
+    this.categorias = this.banco.categorias
+  }
+  ngOnDestroy(): void {
+    console.log('fui destruido')
+    this.categorias = null
+  
   }
   exibir(): void {
-    console.log(this.ideias)
-    //console.log(this.cats)
-    //console.log(this.cats)
-    //console.log(this.cats)
-    //const mostra = item => console.log(item.key)
-    //this.categorias.forEach(mostra)
-    //console.log(this.categorias)
+   
+    this.banco.getAllIdeas3()
+    
   }
-
+ 
   teste(): string{
     return 'ola'
   }
