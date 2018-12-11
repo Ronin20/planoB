@@ -3,15 +3,20 @@ import * as firebase from 'firebase'
 import { AngularFireDatabase, snapshotChanges } from '@angular/fire/database';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
 export class Bd{
 
-    idSala: string
-
+    idSala: string = localStorage.getItem('idSalaLocal')
+    cats: any[] 
+    ideias: any[]
+    categorias: Observable<any>
     constructor(private db: AngularFireDatabase){
-       
+        this.cats = this.getCategorias()
+        this.categorias = this.getAll()
+        this.return_ideas()
     }
     //---------------------------------------------------------------
     public criar_sala(sala: any): void {
@@ -33,22 +38,16 @@ export class Bd{
     }
 
 
-    carregarSala(sala: string){
+    public carregarSala(sala: string){
         this.idSala = sala
-    }
-
-
-    delete(key: string) {
-        this.db.object(`salas/${key}`).remove();
+        localStorage.setItem('idSalaLocal', sala)
     }
 
     public adicionar_categoria(categoria: any): void{
-        firebase.database().ref().child(`salas/${categoria.sala}}`)
+        firebase.database().ref().child(`salas/${this.idSala}/${categoria.nome}`)
             .push({
-                nome: categoria.nome
+                titulo: ''
             })
-        console.log('Categoria adicionada')
-        
     }
 
 /*
@@ -88,9 +87,22 @@ export class Bd{
           })
     }*/
 
-    getIdeas(idSala: string, cat: string): any {
+    return_ideas(): void{
+        console.log('aqui eh o cats: ', this.cats)
+        this.cats.forEach(this.push_i)
+    }
+
+    push_i(i: any): any{
+        this.ideias.push(this.get_i(i))
+    }
+
+    get_i(i: any): any{
+        return this.getIdeas(i).titulo
+    }
+
+    getIdeas(cat: string): any {
         let ideas: any[] = []
-        firebase.database().ref(`salas/${idSala}/${cat}`)
+        firebase.database().ref(`salas/${this.idSala}/${cat}`)
             .once('value')
             .then((snapshot) => {
                 snapshot.forEach((childSnapshot: any) => {
@@ -103,10 +115,10 @@ export class Bd{
 
 
 
-    getCategorias(idSala: string): any{
+    getCategorias(): any{
         let cats: any[] = []
         
-        firebase.database().ref(`salas/${idSala}`)
+        firebase.database().ref(`salas/${this.idSala}`)
             .once('value')
             .then((snapshot) => {
                 snapshot.forEach((childSnapshot: any) => {
@@ -116,9 +128,8 @@ export class Bd{
         return cats
     }
 
-
-    getAll(idSala: string) {
-        return this.db.list(`salas/${idSala}`)
+    getAll() { 
+        return this.db.list(`salas/${this.idSala}`)
           .snapshotChanges()
           .pipe(
             map(changes => {
