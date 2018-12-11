@@ -10,17 +10,13 @@ import { Observable } from 'rxjs';
 export class Bd{
 
     idSala: string = localStorage.getItem('idSalaLocal')
-    cats: any[] = this.getCategorias()
-    ideias: any[]
+    cats: any[] 
     categorias: Observable<any>
-    ideias2: Observable<any>
-
-    ideias3: any[]
 
     constructor(private db: AngularFireDatabase){
         this.idSala = localStorage.getItem('idSalaLocal')
         this.categorias = this.getAll(localStorage.getItem('idSalaLocal'))
-        this.ideias2 = this.getAllIdeas('Categoria 1')
+        this.cats = this.getCategorias()
     }
     //---------------------------------------------------------------
     public criar_sala(sala: any): void {
@@ -46,10 +42,12 @@ export class Bd{
     }
 
     public adicionar_categoria(categoria: any): void{
+        
         firebase.database().ref().child(`salas/${this.idSala}/${categoria.nome}`)
             .push({
                 titulo: ''
             })
+        this.cats = this.getCategorias()
     }
 
     getIdeas(cat: string): any {
@@ -62,6 +60,13 @@ export class Bd{
                 })
             })
         return ideas
+    }
+
+
+    buscaCategoria(indice: number){
+        let todas_categorias: any = this.getCategorias()
+        console.log(todas_categorias[indice])
+        return todas_categorias[indice]
     }
 
     getCategorias(): any{
@@ -77,12 +82,6 @@ export class Bd{
         return cats
     }
     
-    getAllIdeas3() { 
-        console.log('oi')
-        this.ideias2 = this.getAllIdeas(this.cats[0])
-        console.log(this.ideias2)
-       
-    }
     getAllIdeas(cat: string) { 
         return this.db.list(`salas/${this.idSala}/${cat}`)
           .snapshotChanges()
@@ -94,7 +93,6 @@ export class Bd{
     }
 
     getAll(cat: string) { 
-        console.log('to pegando as categorias da sala: ',this.idSala)
         return this.db.list(`salas/${this.idSala}`)
           .snapshotChanges()
           .pipe(
