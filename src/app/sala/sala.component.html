@@ -4,14 +4,18 @@
 			<div class="lists" >
 				<div class="list" *ngFor="let categoria of categorias | async">
 					<header>{{categoria.key}}</header>
-					<div class="list" *ngFor="let c of cats">
-						
-							<ul>
-								<li>{{c.index}}</li>
-							</ul>
-						
-					</div>
-					
+						<ul>
+							<li>Item</li>
+						</ul>
+						<ul>
+							<li>Item</li>
+						</ul>
+						<ul>
+							<li>Item</li>
+						</ul>
+						<ul>
+							<li>Item</li>
+						</ul>
 					<footer>
 					</footer>
 				</div>
@@ -29,6 +33,9 @@
 			<div style="margin-top:30px; margin-right: 10px;margin-left: 10px;">
 				<app-menu-add-categoy></app-menu-add-categoy>
 			</div>
+		</div>
+		<div class="row">
+			<button type="button" class="btn btn-danger ml-2" (click)="terminarSala()">Terminar</button>
 		</div>
 	</div>
 </div>

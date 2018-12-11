@@ -3,12 +3,20 @@ import * as firebase from 'firebase'
 import { AngularFireDatabase, snapshotChanges } from '@angular/fire/database';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
 export class Bd{
+
+    idSala: string = localStorage.getItem('idSalaLocal')
+    cats: any[] 
+    ideias: any[]
+    categorias: Observable<any>
     constructor(private db: AngularFireDatabase){
-       
+        this.cats = this.getCategorias()
+        this.categorias = this.getAll()
+        this.return_ideas()
     }
     //---------------------------------------------------------------
     public criar_sala(sala: any): void {
@@ -23,23 +31,26 @@ export class Bd{
     }
 
     public adicionar_ideia(ideia: any): void{
-        firebase.database().ref().child(`salas/${ideia.idSala}/${ideia.categoria}`)
+        firebase.database().ref().child(`salas/${this.idSala}/${ideia.categoria}`)
             .push({
                titulo: ideia.ideia
             })
-        console.log('Chegamos ate aqui')
     }
 
 
+    public carregarSala(sala: string){
+        this.idSala = sala
+        localStorage.setItem('idSalaLocal', sala)
+    }
 
     public adicionar_categoria(categoria: any): void{
-        firebase.database().ref().child(`salas/${categoria.sala}/${categoria.nome}`)
-            .push()
-        console.log('Categoria adicionada')
-        
+        firebase.database().ref().child(`salas/${this.idSala}/${categoria.nome}`)
+            .push({
+                titulo: ''
+            })
     }
 
-
+/*
     public atualiza_dados(sala: string): any{
         console.log('Entramos aqui mlk')
         firebase.database().ref(`salas/${sala}`)
@@ -60,7 +71,7 @@ export class Bd{
     public add_categoria(): void {
 
     }
-
+    */
     public teste(): any {
         /*console.log('FUNÇÃO TESTE')
         var salas = firebase.database().ref('salas/' + '944');
@@ -76,27 +87,49 @@ export class Bd{
           })
     }*/
 
-    getCategorias(idSala: string): any{
-        console.log('Entramos aqui mlk')
-        let cats: any[] = []
-        firebase.database().ref(`salas/${idSala}`)
+    return_ideas(): void{
+        console.log('aqui eh o cats: ', this.cats)
+        this.cats.forEach(this.push_i)
+    }
+
+    push_i(i: any): any{
+        this.ideias.push(this.get_i(i))
+    }
+
+    get_i(i: any): any{
+        return this.getIdeas(i).titulo
+    }
+
+    getIdeas(cat: string): any {
+        let ideas: any[] = []
+        firebase.database().ref(`salas/${this.idSala}/${cat}`)
             .once('value')
             .then((snapshot) => {
-                
-                console.log('SNAPHOT COMPLETO: ', snapshot)
-                //let snap = snapshot.val()
-                //console.log('teste: ', snap.titulo)
                 snapshot.forEach((childSnapshot: any) => {
-                    //console.log(childSnapshot.val())
-                    cats.push(childSnapshot.titulo)
+                    ideas.push(childSnapshot.val())
+                })
+            })
+        return ideas
+    }
+
+
+
+
+    getCategorias(): any{
+        let cats: any[] = []
+        
+        firebase.database().ref(`salas/${this.idSala}`)
+            .once('value')
+            .then((snapshot) => {
+                snapshot.forEach((childSnapshot: any) => {
+                    cats.push(childSnapshot.key)
                 })
             })
         return cats
     }
 
-
-    getAll(idSala: string) {
-        return this.db.list(`salas/${idSala}`)
+    getAll() { 
+        return this.db.list(`salas/${this.idSala}`)
           .snapshotChanges()
           .pipe(
             map(changes => {
