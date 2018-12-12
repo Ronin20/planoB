@@ -29,7 +29,7 @@ export class Autenticacao{
                 this.router.navigate(['/login'])
             })
             .catch((error: Error) => {
-                console.log(error)
+                alert('Este email já está registrado')
             })
     }
 
@@ -65,6 +65,8 @@ export class Autenticacao{
         firebase.auth().signOut()
             .then(() => {
                 localStorage.removeItem('idToken')
+                localStorage.removeItem('idSalaLocal')
+                
                 this.token_id = undefined
                 this.router.navigate(['/login'])
             })
