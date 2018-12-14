@@ -23,7 +23,6 @@ export class Bd implements OnInit{
         this.cats = this.getCategorias()
         this.salas = this.getSalas()   
         this.info = this.getAllInfo() 
-        
     }
 
     ngOnInit() {
@@ -38,7 +37,8 @@ export class Bd implements OnInit{
                 tema: sala.tema,
                 admin: sala.email
         })
-        console.log(sala)
+
+        alert('Sala criada com sucesso - ID: ' + sala.id)
     }
 
     public adicionar_ideia(ideia: any): void{
@@ -150,6 +150,15 @@ export class Bd implements OnInit{
                 return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
             })
           );
+    }
+
+    teste(){ //Estou tentando pegar o titulo das salas
+        let lista_salas: string
+        let sala: Observable<any>
+        //const func3 = f3 => {console.log(f3.tema)}
+        const func2 = f2 => {console.log(f2.info)}
+        const func1 = f1 => {f1.forEach(func2)}
+        console.log(this.salas.forEach(func1))
     }
 
 }

@@ -27,6 +27,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
 import { CategoriaComponent } from './sala/categoria/categoria.component';
 import { SalaVotacaoComponent } from './sala-votacao/sala-votacao.component';
+import { ListarSalasComponent } from './content/area-trabalho/listar-salas/listar-salas.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { SalaVotacaoComponent } from './sala-votacao/sala-votacao.component';
     MenuAddIdeaComponent,
     MenuAddCategoyComponent,
     CategoriaComponent,
-    SalaVotacaoComponent
+    SalaVotacaoComponent,
+    ListarSalasComponent
   
   ],
   imports: [

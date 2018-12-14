@@ -16,6 +16,6 @@ export const ROUTES: Routes = [
     { path: 'area-trabalho', component: AreaTrabalhoComponent , canActivate: [ AutenticacaoGuard ]},
     { path: 'criar-sala', component: CriarSalaComponent, canActivate: [ AutenticacaoGuard ] },
     { path: 'entrar-sala', component: EntrarSalaComponent, canActivate: [ AutenticacaoGuard ]},
-    { path: 'sala', component: SalaComponent },
-    { path: 'sala-votacao', component: SalaVotacaoComponent }
+    { path: 'sala', component: SalaComponent , canActivate: [ AutenticacaoGuard ]},
+    { path: 'sala-votacao', component: SalaVotacaoComponent, canActivate: [ AutenticacaoGuard ]}
 ]
