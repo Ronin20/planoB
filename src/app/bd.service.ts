@@ -38,7 +38,8 @@ export class Bd implements OnInit{
                 tema: sala.tema,
                 admin: sala.email
         })
-        console.log(sala)
+
+        alert('Sala criada com sucesso - ID: ' + sala.id)
     }
 
     public adicionar_ideia(ideia: any): void{

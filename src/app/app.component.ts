@@ -16,5 +16,5 @@ export class AppComponent implements OnInit {
     firebase.initializeApp(environment.firebase)
   }
   
-  title = 'planoB';
+  title = 'Brainstorming Rooms';
 }
