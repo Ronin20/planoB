@@ -36,7 +36,7 @@ export class AreaTrabalhoComponent implements OnInit {
   }
 
   exibir(){
-    //console.log(this.keySala)
+    this.banco.teste()
   }
 
   refresh(): void {
