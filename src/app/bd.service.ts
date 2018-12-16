@@ -4,9 +4,13 @@ import { AngularFireDatabase, snapshotChanges } from '@angular/fire/database';
 import { Injectable, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Identidade } from './shared/identidade.model'
+import { Sala } from './shared/sala.model';
 @Injectable({
     providedIn: 'root'
 })
+
+
 export class Bd implements OnInit{
     
 
@@ -15,14 +19,13 @@ export class Bd implements OnInit{
     administrador: string
     categorias: Observable<any>
     info: Observable<any>
-    salas: Observable<any>
-
+    salas: Identidade[]
     constructor(private db: AngularFireDatabase){
         this.idSala = localStorage.getItem('idSalaLocal')
         this.categorias = this.getAll(localStorage.getItem('idSalaLocal'))
-        this.cats = this.getCategorias()
-        this.salas = this.getSalas()   
-        this.info = this.getAllInfo() 
+        this.cats = this.getCategorias() 
+        this.info = this.getAllInfo()
+        this.salas = this.getSalas()
     }
 
     ngOnInit() {
@@ -37,8 +40,8 @@ export class Bd implements OnInit{
                 tema: sala.tema,
                 admin: sala.email
         })
-
         alert('Sala criada com sucesso - ID: ' + sala.id)
+        this.getSalas()
     }
 
     public adicionar_ideia(ideia: any): void{
@@ -142,23 +145,52 @@ export class Bd implements OnInit{
         return admin
     }*/
 
-    getSalas() { 
-        return this.db.list(`salas/`)
-          .snapshotChanges()
-          .pipe(
-            map(changes => {
-                return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
-            })
-          );
+    verificaExistencia(idSala: string):boolean {
+        let salas: Identidade[] = this.getSalas()
+        for(let i = 0; i < salas.length; i++ )
+            if(salas[i].id == idSala)
+                return true
+        return false
     }
 
-    teste(){ //Estou tentando pegar o titulo das salas
-        let lista_salas: string
-        let sala: Observable<any>
-        //const func3 = f3 => {console.log(f3.tema)}
-        const func2 = f2 => {console.log(f2.info)}
-        const func1 = f1 => {f1.forEach(func2)}
-        console.log(this.salas.forEach(func1))
+
+    getSalas(): any { 
+        let lista_salas: Identidade[] = []
+        firebase.database().ref(`salas`)
+        .once('value')
+        .then((snapshot) => {
+            snapshot.forEach((childSnapshot) => {
+                let key: string = childSnapshot.key
+                this.getInfoRoom(key, lista_salas)
+            })
+        })
+        return lista_salas
+    }
+
+    getInfoRoom(room: string, lista: Identidade[]) { 
+        firebase.database().ref(`salas/${room}/info`)
+            .once('value')
+            .then((snapshot) => {
+                snapshot.forEach((childSnaphot) => {
+                    let id_sala = childSnaphot.val().id
+                    let tema_sala = childSnaphot.val().tema
+                    lista.push({id: id_sala, tema: tema_sala})
+                })
+            })
+    }
+
+    getQtdIdeias(room: string){
+        var contador = 0
+        firebase.database().ref(`salas/${room}/categorias`)
+            .once('value')
+            .then((snapshot) => {
+                
+                snapshot.forEach((childSnaphot) => {
+                    const incrementa = () => {contador += childSnaphot.numChildren()}
+                    incrementa()
+                })
+            })
+        console.log(contador)
     }
 
 }

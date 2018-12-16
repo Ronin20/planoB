@@ -1,3 +1,10 @@
-<p>
-  listar-salas works!
-</p>
+<div class="container">
+	<!-- Category -->
+	<div class="single">
+		<h3 class="side-title">Salas Existentes</h3>
+		<ul class="list-unstyled" *ngFor="let sala of salas">
+			<li><a>{{sala.id}} - {{sala.tema}}</a></li>
+		</ul>
+   </div>
+
+</div>
