@@ -8,6 +8,7 @@ import { ContentComponent } from './content/content.component';
 import { Routes } from '@angular/router'
 import { CriarSalaComponent } from './content/area-trabalho/criar-sala/criar-sala.component';
 import { EntrarSalaComponent } from './content/area-trabalho/entrar-sala/entrar-sala.component';
+import { TestesComponent } from './testes/testes.component';
 
 export const ROUTES: Routes = [
     { path: '', component: ContentComponent },
@@ -17,5 +18,7 @@ export const ROUTES: Routes = [
     { path: 'criar-sala', component: CriarSalaComponent, canActivate: [ AutenticacaoGuard ] },
     { path: 'entrar-sala', component: EntrarSalaComponent, canActivate: [ AutenticacaoGuard ]},
     { path: 'sala', component: SalaComponent , canActivate: [ AutenticacaoGuard ]},
-    { path: 'sala-votacao', component: SalaVotacaoComponent, canActivate: [ AutenticacaoGuard ]}
+    { path: 'sala-votacao', component: SalaVotacaoComponent, canActivate: [ AutenticacaoGuard ]},
+    { path: 'testes', component: TestesComponent}
+    
 ]

@@ -1,19 +1,22 @@
 import { ItemSala } from './../../shared/item-sala.model';
 import { SALAS } from './items-mocks';
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit, Injectable, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Bd } from 'src/app/bd.service';
 import { Router } from '@angular/router';
+import { Identidade } from './../../shared/identidade.model'
 
 @Component({
   selector: 'app-area-trabalho',
   templateUrl: './area-trabalho.component.html',
   styleUrls: ['./area-trabalho.component.css']
 })
+
 @Injectable()
-export class AreaTrabalhoComponent implements OnInit {
-  public salas2: ItemSala[] = SALAS
-  salas: Observable<any>
+export class AreaTrabalhoComponent implements OnInit, OnChanges {
+  salas: Identidade[]
+  //public salas2: ItemSala[] = SALAS
+  //salas: Observable<any>
   //info: Observable<any>
   //keySala: string
 
@@ -23,8 +26,11 @@ export class AreaTrabalhoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.salas = this.banco.salas
-    //this.info = this.banco.info
+    this.salas = this.banco.getSalas()
+  }
+
+  ngOnChanges() {
+    
   }
 
   entrarEmSala(){
@@ -36,7 +42,8 @@ export class AreaTrabalhoComponent implements OnInit {
   }
 
   exibir(){
-    this.banco.teste()
+    this.banco.getQtdIdeias('898')
+    //console.log(this.banco.lista_salas)
   }
 
   refresh(): void {

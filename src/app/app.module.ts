@@ -28,6 +28,7 @@ import { environment } from '../environments/environment';
 import { CategoriaComponent } from './sala/categoria/categoria.component';
 import { SalaVotacaoComponent } from './sala-votacao/sala-votacao.component';
 import { ListarSalasComponent } from './content/area-trabalho/listar-salas/listar-salas.component';
+import { TestesComponent } from './testes/testes.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ListarSalasComponent } from './content/area-trabalho/listar-salas/lista
     MenuAddCategoyComponent,
     CategoriaComponent,
     SalaVotacaoComponent,
-    ListarSalasComponent
+    ListarSalasComponent,
+    TestesComponent
   
   ],
   imports: [
